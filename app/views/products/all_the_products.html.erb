@@ -1,19 +1,29 @@
 <h1>All Products!</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Image</th>
-    <th>Description</th>
-  </tr>
-  <% @products.each do |product| %>
-    <tr>
-      <td><%= product.name %></td>
-      <td><%= product.price %></td>
-      <td><img src="<%= product.image %>"></td>
-      <td><%= product.description %></td>
-    </tr>
-  <% end %>
+<div class="container">
 
-</table>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+
+      <table class="table-striped">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Description</th>
+        </tr>
+        <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+          <td><img src="<%= product.image %>" class="img-responsive"></td>
+          <td><%= product.description %></td>
+        </tr>
+        <% end %>
+
+      </table>
+
+    </div>
+  </div>
+</div>
