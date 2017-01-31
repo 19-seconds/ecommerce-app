@@ -3,6 +3,8 @@
 <h2><%= @product.name %></h2>
 <h2><%= @product.description %></h2>
 <h2>$<%= @product.price %></h2>
+<h2><%= @product.supplier.name %></h2>
+<h2><%= @product.supplier.email %></h2>
 <img src="<%= @product.image %>">
 <br>
 <button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>

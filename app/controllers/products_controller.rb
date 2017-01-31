@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     if params[:sort]
       @products = Product.all.order(price: params[:price])
     elsif params[:filter] == "discount"
-      @products = Product.where("price < ?", 251)
+      @products = Product.discounted_products
     else
       @products = Product.all
     end
