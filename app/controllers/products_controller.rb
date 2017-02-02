@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
       name: params[:name],
       description: params[:description],
       price: params[:price],
-      image: params[:image]
+      supplier_id: params[:supplier_id]
     })
     product.save
     flash[:success] = "Product Updated"  
