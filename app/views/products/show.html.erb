@@ -5,7 +5,9 @@
 <h2>$<%= @product.price %></h2>
 <h2><%= @product.supplier.name %></h2>
 <h2><%= @product.supplier.email %></h2>
-<img src="<%= @product.image %>">
+<% @product.images.each do |image| %>
+  <img class="show-images" src="<%= image.url %>">
+<% end %>
 <br>
 <button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>
 <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>

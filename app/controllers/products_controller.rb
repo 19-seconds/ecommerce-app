@@ -1,6 +1,13 @@
 class ProductsController < ApplicationController
 
   def index
+    if session[:count] == nil
+      session[:count] = 0
+    end
+    session[:count] += 1
+    @visit_count = session[:count]
+
+
     if params[:sort]
       @products = Product.all.order(price: params[:price])
     elsif params[:filter] == "discount"
@@ -19,6 +26,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @suppliers = Supplier.all
   end
 
   def create
@@ -26,7 +34,7 @@ class ProductsController < ApplicationController
       name: params[:name],
       description: params[:description],
       price: params[:price],
-      image: params[:image]
+      supplier_id: params[:supplier_id]
       })
     product.save
     flash[:success] = "Product Created"

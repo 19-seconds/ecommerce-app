@@ -1,29 +1,18 @@
-<h1>All Products!</h1>
+<h1>All Products</h1>
 
-<div class="container">
-
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-      <%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %>
-      <table class="table-striped">
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Image</th>
-          <th>Description</th>
-        </tr>
-        <% @products.each do |product| %>
-        <tr>
-          <td> <a href="/products/<%= product.id %>"><%= product.name %></a></td>
-          <td><%= product.price %></td>
-          <td><img src="<%= product.image %>" class="shop-icon"></td>
-          <td><%= product.description %></td>
-        </tr>
+<div class="row">
+  <% @products.each_slice(3) do |three_products| %>
+    <div class="row">
+        <% three_products.each do |product| %>
+          <div class="col-md-4">
+            <h2><%= link_to product.name, "/products/#{product.id}" %></h2>
+            <img src="<%= product.images.first.url %>" class="img-responsive">
+            <h2>Ingredients: <%= product.description %></h2>
+            <h2>Prep time: <%= product.price %></h2>
+          </div>
         <% end %>
-
-      </table>
-
     </div>
-  </div>
+  <% end %>
 </div>
+
+<h1>You have (your browser) visited this site <%= @visit_count %> times.</h1>
