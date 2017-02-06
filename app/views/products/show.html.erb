@@ -9,6 +9,21 @@
   <img class="show-images" src="<%= image.url %>">
 <% end %>
 <br>
+
+<% if current_user %>
+  <%= form_tag "/orders", method: :post do %>
+    <div>
+      Quantity: <input type="text" name="quantity">
+    </div>
+    <div>
+      <input type="hidden" name="product_id" value="<%= @product.id %>">
+    </div>
+    <div>
+      <input type="submit" value="Buy Now!">
+    </div>
+  <% end %>
+<% end %>
+
 <button class="btn btn-success"><a href="/products/<%= @product.id %>/edit">Edit</a></button>
 <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
 
