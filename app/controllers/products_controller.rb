@@ -1,17 +1,13 @@
 class ProductsController < ApplicationController
 
   def index
-    if session[:count] == nil
-      session[:count] = 0
-    end
-    session[:count] += 1
-    @visit_count = session[:count]
-
 
     if params[:sort]
       @products = Product.all.order(price: params[:price])
     elsif params[:filter] == "discount"
       @products = Product.discounted_products
+    elsif params[:category]
+        @products =  Category.find_by(name: params[:category]).products
     else
       @products = Product.all
     end

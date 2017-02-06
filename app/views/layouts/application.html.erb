@@ -41,6 +41,10 @@
                 <li><a href="/products?sort=desc">Price Highest To Lowest</a></li>
                 <li><a href="/products?filter=discount">Discount Items</a></li>
                 <li><a href="/products/random">Random Product</a></li>
+                <% Category.all.each do |category| %>
+                  <li><a href="/products/?category=<%= category.name %>"><%= category.name.capitalize %></a></li>
+                <% end %>
+
 
 
               </ul>
