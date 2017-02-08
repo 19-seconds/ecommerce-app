@@ -5,13 +5,18 @@
 <h2>$<%= @product.price %></h2>
 <h2><%= @product.supplier.name %></h2>
 <h2><%= @product.supplier.email %></h2>
+<ul>
+  <% @product.categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+</ul>
 <% @product.images.each do |image| %>
   <img class="show-images" src="<%= image.url %>">
 <% end %>
 <br>
 
 <% if current_user %>
-  <%= form_tag "/orders", method: :post do %>
+  <%= form_tag "/carted_products", method: :post do %>
     <div>
       Quantity: <input type="text" name="quantity">
     </div>
@@ -19,7 +24,7 @@
       <input type="hidden" name="product_id" value="<%= @product.id %>">
     </div>
     <div>
-      <input type="submit" value="Buy Now!">
+      <input type="submit" value="Add to Cart">
     </div>
   <% end %>
 <% end %>

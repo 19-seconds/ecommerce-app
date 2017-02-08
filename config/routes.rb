@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  post "/orders", to: 'orders#create'
   get "/orders/:id", to: 'orders#show'
+
+  get "/carted_products", to: 'carted_products#index'
+  post "/carted_products", to: 'carted_products#create'
 end
