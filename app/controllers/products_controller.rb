@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :search]
 
   def index
 
@@ -22,7 +23,12 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @suppliers = Supplier.all
+    if current_user && current_user.admin
+      @suppliers = Supplier.all
+    else
+      flash[:danger] = "Get out of here HACKER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      redirect_to "/"
+    end
   end
 
   def create

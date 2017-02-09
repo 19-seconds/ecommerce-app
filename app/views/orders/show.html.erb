@@ -1,9 +1,27 @@
-<h1>Your Order</h1>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h1>Your Order</h1>
+    <table class="table table-space">
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price per Product</th>
+        </tr>
+      <% @order.carted_products.each do |carted_product| %>
+        <tr>
+          <td><%= carted_product.product.name %></td>
+          <td><%= carted_product.quantity %></td>
+          <td><%= number_to_currency(carted_product.product.price) %></td>
+        </tr>
+      <% end %>
+    </table>
+    <ul>
+      <li>Order Number <%= @order.id + 100000 %></li>
+      <li>Subtotal <%= number_to_currency(@order.subtotal) %></li>
+      <li>Tax <%= number_to_currency(@order.tax) %></li>
+      <li>Total <%= number_to_currency(@order.total) %></li>
+    </ul>    
+  </div>
+</div>
 
-<ul>
-  <li>Order Number <%= @order.id %></li>
-  <li>Product <%= @order.product.name %></li>
-  <li>Subtotal <%= @order.subtotal %></li>
-  <li>Tax <%= @order.tax %></li>
-  <li>Total <%= @order.total %></li>
-</ul>

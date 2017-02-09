@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
   helper_method :current_user
+
+  def authenticate_user!
+    flash[:danger] = "Access Denied"
+    redirect_to "/" unless current_user
+  end
 end

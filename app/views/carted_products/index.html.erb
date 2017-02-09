@@ -1,20 +1,23 @@
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-  <h2>Your order: <%= @carted_products.last.order.user.name %></h2>
+ 
     <table class="table">
         <tr>
           <th>Product Name</th>
           <th>Quantity</th>
           <th>Price per Product</th>
+          <th>Remove</th>
         </tr>
-      <% @carted_products.each do |carted_product| %>
+      <% @order.carted_products.each do |carted_product| %>
         <tr>
           <td><%= carted_product.product.name %></td>
           <td><%= carted_product.quantity %></td>
           <td><%= carted_product.product.price %></td>
+          <td><%= link_to "Remove", "/carted_products/#{carted_product.id}", method: :delete %></td>
         </tr>
       <% end %>
     </table>
+    <%= button_to "Buy Now", "orders/#{@order.id}", class: "btn btn-success", method: :patch %>
   </div>
 </div>

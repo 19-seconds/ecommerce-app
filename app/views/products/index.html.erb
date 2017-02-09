@@ -1,6 +1,10 @@
 <h1>All Products</h1>
 
 <div class="row">
+  <% if current_user && current_user.admin %>
+    <%= link_to "Add Product", "/products/new" %>
+  <% end %>
+
   <% @products.each_slice(3) do |three_products| %>
     <div class="row">
         <% three_products.each do |product| %>
