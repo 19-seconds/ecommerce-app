@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :search]
-
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  
   def index
-
     if params[:sort]
       @products = Product.all.order(price: params[:price])
     elsif params[:filter] == "discount"

@@ -6,6 +6,10 @@ class Product < ApplicationRecord
   has_many :category_products
   has_many :categories, through: :category_products
 
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :price, numericality: {greater_than: 0}
+
   def self.discounted_products
     Product.where("price < ?", 50)
   end
