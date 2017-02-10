@@ -22,9 +22,9 @@
   <div>
     Supplier:
     <select name="supplier_id">
-      <option selected="<%= @product.supplier_id %>" disabled selected>Select your option</option>
+      <option value="" disabled selected>Select your option</option>
       <% @suppliers.each do |supplier| %>
-        <option value="<%= supplier.id %>"><%= supplier.name %></option>
+        <option value="<%= supplier.id %>" <%= "selected" if @product.supplier_id == supplier.id %>><%= supplier.name %></option>
       <% end %>
     </select>
       
