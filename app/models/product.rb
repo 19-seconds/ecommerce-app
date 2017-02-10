@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   has_many :category_products
   has_many :categories, through: :category_products
 
-  validates :name, presence: true
+  validates :name, presence: { message: "How DARE you forget a name! Leave this website at once!" }
   validates :description, presence: true
   validates :price, numericality: {greater_than: 0}
 

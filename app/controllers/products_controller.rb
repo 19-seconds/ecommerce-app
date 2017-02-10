@@ -23,24 +23,25 @@ class ProductsController < ApplicationController
   end
 
   def new
-    if current_user && current_user.admin
-      @suppliers = Supplier.all
-    else
-      flash[:danger] = "Get out of here HACKER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      redirect_to "/"
-    end
+    @suppliers = Supplier.all
+    @product = Product.new
   end
 
   def create
-    product = Product.new({
+    @product = Product.new({
       name: params[:name],
       description: params[:description],
       price: params[:price],
       supplier_id: params[:supplier_id]
       })
-    product.save
-    flash[:success] = "Product Created"
-    redirect_to "/products/#{product.id}"
+    if @product.save
+      flash[:success] = "Product Created"
+      redirect_to "/products/#{@product.id}"
+    else
+      @suppliers = Supplier.all
+      flash[:warning] = "Product NOT Created"
+      render :new
+    end
   end
 
   def edit

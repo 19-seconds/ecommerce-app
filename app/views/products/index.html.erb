@@ -10,7 +10,7 @@
         <% three_products.each do |product| %>
           <div class="col-md-4">
             <h2><%= link_to product.name, "/products/#{product.id}" %></h2>
-            <img src="<%= product.images.first.url %>" class="img-responsive">
+            <img src="<%= product.images.first.url if product.images.any? %>" class="img-responsive">
             <h2>Ingredients: <%= product.description %></h2>
             <h2>Prep time: <%= product.price %></h2>
           </div>
