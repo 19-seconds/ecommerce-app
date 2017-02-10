@@ -45,21 +45,25 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @suppliers = Supplier.all
     @product = Product.find_by(id: params[:id])
   end
 
   def update
-    product = Product.find_by(id: params[:id])
-    product.assign_attributes({
+    @product = Product.find_by(id: params[:id])
+    @product.assign_attributes({
       name: params[:name],
       description: params[:description],
       price: params[:price],
       supplier_id: params[:supplier_id]
     })
-    product.save
-    flash[:success] = "Product Updated"  
-    redirect_to "/products/#{product.id}"
-
+    if @product.save
+      flash[:success] = "Product Updated"  
+      redirect_to "/products/#{@product.id}"
+    else
+      @suppliers = Supplier.all
+      render :edit
+    end
   end
 
   def destroy
